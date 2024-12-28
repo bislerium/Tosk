@@ -2,6 +2,12 @@
 @inject ITodoService TodoTaskService
 
 <div class="d-flex flex-column justify-content-between p-3" style="height:100vh">
+    <div class="mb-3 row">
+        <div class="col-auto row">
+            <div class="col-auto"><span class="fs-3 fw-bold">>_ Tosk</span></div>
+            <div class="col-auto"><ToggleThemeButton/></div>
+        </div>
+    </div>
     <div class="overflow-auto remove-scrollbar" tabindex="-1" style="outline: none">
         <ol class="list-group  list-group-flush">
             @foreach (var task in TodoTaskService.GetAll())

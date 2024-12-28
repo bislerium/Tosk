@@ -1,11 +1,11 @@
-﻿using Tosk.Models;
+﻿using TodoModel = Tosk.Models.Todo;
 
-namespace Tosk.Services;
+namespace Tosk.Services.Todo;
 
 public class TodoService : ITodoService
 {
     //  In-memory data source
-    private readonly List<Todo> _tasks =
+    private readonly List<TodoModel> _tasks =
             [
             "Complete project documentation",
             "Review pull requests",
@@ -24,16 +24,16 @@ public class TodoService : ITodoService
         _tasks.Add(task);
     }
 
-    public IEnumerable<Todo> GetAll() => _tasks
+    public IEnumerable<TodoModel> GetAll() => _tasks
         .OrderBy(x => x.IsCompleted)
         .ThenByDescending(x => x.IsCompleted ? x.CompletedAt : x.CreatedAt)
         .ToArray();
 
-    public IEnumerable<Todo> GetCompletedTasks() => _tasks
+    public IEnumerable<TodoModel> GetCompletedTasks() => _tasks
         .Where(x => x.IsCompleted)
         .ToArray();
 
-    public IEnumerable<Todo> GetImportantTasks() => _tasks
+    public IEnumerable<TodoModel> GetImportantTasks() => _tasks
         .Where(x => x.IsImportant)
         .ToArray();
 }

@@ -1,0 +1,52 @@
+﻿<button type="button" class="btn theme-toggle-btn" @onclick="ToggleThemeAsync">
+    <i class="bi @(IsLightTheme ? "bi-sun-fill" : "bi-moon-stars-fill")"></i>
+</button>
+
+@* ChatGPT generated style code! *@
+<style>
+    .theme-toggle-btn {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+
+    .theme-toggle-btn i {
+        font-size: 1.2rem;
+        transition: transform 0.6s ease, color 0.3s ease;
+    }
+
+    [data-bs-theme="light"] .theme-toggle-btn i.bi-sun-fill {
+        color: #FFA500;
+    }
+
+    [data-bs-theme="dark"] .theme-toggle-btn i.bi-moon-stars-fill {
+        color: #C0C0C0;
+    }
+
+    .theme-toggle-btn i.bi-sun-fill {
+        transform: rotate(0deg);
+    }
+
+    .theme-toggle-btn i.bi-moon-stars-fill {
+        transform: rotate(360deg);
+    }
+    
+    .theme-toggle-btn i.bi-sun-fill, .theme-toggle-btn i.bi-moon-stars-fill {
+        transition: transform 0.6s ease;
+    }
+</style>
+
+
+@code {
+    [CascadingParameter(Name = nameof(IThemingService.ToggleAsync))]
+    public Func<Task> ToggleThemeAsync { get; set; }
+
+    [CascadingParameter(Name = nameof(IThemingService.Theme))]
+    public Theme Theme { get; set; }
+
+    bool IsLightTheme => Theme == Theme.Light;
+}
