@@ -1,0 +1,12 @@
+﻿<button class="btn" @onclick="LaunchRepoLink">
+    <i class="bi bi-github"></i>
+</button>
+
+@code {
+    const string Link = "https://www.github.com/bislerium/tosk";
+    async Task LaunchRepoLink()
+    {
+        Uri uri = new Uri(Link);
+        await Browser.Default.OpenAsync(uri, BrowserLaunchMode.SystemPreferred);
+    }
+}

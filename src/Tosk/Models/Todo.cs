@@ -2,7 +2,7 @@
 
 public class Todo
 {
-    public Guid Id { get; set; }
+    public Guid Id { get; set; } = Guid.NewGuid();
     public required string Title { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public bool IsCompleted { get; set; }

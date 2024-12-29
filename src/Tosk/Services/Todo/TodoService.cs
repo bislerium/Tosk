@@ -29,11 +29,13 @@ public class TodoService : ITodoService
         .ThenByDescending(x => x.IsCompleted ? x.CompletedAt : x.CreatedAt)
         .ToArray();
 
-    public IEnumerable<TodoModel> GetCompletedTasks() => _tasks
+    public IEnumerable<TodoModel> GetAllCompleted() => _tasks
         .Where(x => x.IsCompleted)
+        .OrderBy(x => x.CompletedAt)
         .ToArray();
 
-    public IEnumerable<TodoModel> GetImportantTasks() => _tasks
+    public IEnumerable<TodoModel> GetAllImportant() => _tasks
         .Where(x => x.IsImportant)
+        .OrderBy(x => x.CreatedAt)
         .ToArray();
 }

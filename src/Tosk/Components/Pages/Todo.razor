@@ -2,35 +2,56 @@
 @inject ITodoService TodoTaskService
 
 <div class="d-flex flex-column justify-content-between p-3" style="height:100vh">
-    <div class="mb-3 row">
-        <div class="col-auto row">
-            <div class="col-auto"><span class="fs-3 fw-bold">>_ Tosk</span></div>
-            <div class="col-auto"><ToggleThemeButton/></div>
+    <div class="mb-3 row justify-content-between">
+        <div class="col-auto fs-4">
+            <ThemeTogglerButton />
+            <GithubRepoLaunchButton />
+            <span class="fw-bold">>_ Tosk</span>
+        </div>
+        <div class="col-auto" >
+            <InputRadioGroup @bind-Value="FilterBy">
+                <div class="btn-group" role="group">
+                    <InputRadio Value="FilterBy.All" id="all" class="btn-check" />
+                    <label class="btn btn-outline-secondary" for="all">
+                        <i class="bi bi-sunglasses"></i> All
+                    </label>
+
+                    <InputRadio Value="FilterBy.Completed" id="completed" class="btn-check" />
+                    <label class="btn btn-outline-success" for="completed">
+                        <i class="bi bi-check-circle-fill"></i> Completed
+                    </label>
+
+                    <InputRadio Value="FilterBy.Important" id="important" class="btn-check" />
+                    <label class="btn btn-outline-warning" for="important">
+                        <i class="bi bi-star-fill"></i> Important
+                    </label>
+                </div>
+            </InputRadioGroup>
         </div>
     </div>
     <div class="overflow-auto remove-scrollbar" tabindex="-1" style="outline: none">
         <ol class="list-group  list-group-flush">
-            @foreach (var task in TodoTaskService.GetAll())
+            @foreach (var todo in Todos)
             {
-                <li class="list-group-item rounded @(task.IsImportant ? "list-group-item-warning" : "") d-flex justify-content-between align-items-center">
+                <li class="list-group-item rounded @(todo.IsImportant ? "list-group-item-warning" : "") d-flex justify-content-between align-items-center">
                     <div class="ms-2">
-                        <div class="fw-bold overflow-auto @(task.IsCompleted ? "text-decoration-line-through" : "")">
-                            @task.Title
+                        <div class="fw-bold overflow-auto @(todo.IsCompleted ? "line-through-complete" : "")">
+                            @todo.Title
                         </div>
                     </div>
                     <div class="row ms-2 align-items-center justify-content-end flex-wrap-reverse">
                         <div class="col-auto">
-                            @if (task.IsCompleted)
+                            @if (todo.IsCompleted)
                             {
-                                <span class="badge text-bg-success rounded-pill">@task.CompletedAt</span>
+                                <span class="badge text-bg-success rounded-pill">@todo.CompletedAt</span>
                             }
                         </div>
                         <div class="col-auto text-nowrap">
-                            <button class="btn" @onclick="() => task.ToggleCompletion()">
-                                <i class="bi @(task.IsCompleted ? "bi-check-circle-fill text-success" : "bi-check-circle")" />
+                            <button class="btn" @onclick="() => todo.ToggleCompletion()">
+                                <i class="bi @(todo.IsCompleted ? "bi-check-circle-fill text-success" : "bi-check-circle")" />
                             </button>
-                            <button class="btn" @onclick="() => task.ToggleImportance()">
-                                <i class="bi @(task.IsImportant ? "bi-star-fill text-warning" : "bi-star")" />
+                            <button class="btn" @onclick="() => todo.ToggleImportance()">
+                                <i class="bi @(todo.IsImportant ? "bi-star-fill text-warning" : "bi-star")" />
                             </button>
                         </div>                        
                     </div>
@@ -54,4 +75,13 @@
 
 @code {
     string TodoTitle { get; set; } = string.Empty;
+
+    FilterBy FilterBy { get; set; }
+
+    IEnumerable<Models.Todo> Todos => FilterBy switch
+    {
+        FilterBy.Completed => TodoTaskService.GetAllCompleted(),
+        FilterBy.Important => TodoTaskService.GetAllImportant(),
+        _ => TodoTaskService.GetAll(),
+    };
 }

@@ -9,6 +9,6 @@ public interface ITodoService
 
     //Read
     IEnumerable<TodoModel> GetAll();
-    IEnumerable<TodoModel> GetCompletedTasks();
-    IEnumerable<TodoModel> GetImportantTasks();
+    IEnumerable<TodoModel> GetAllCompleted();
+    IEnumerable<TodoModel> GetAllImportant();
 }
