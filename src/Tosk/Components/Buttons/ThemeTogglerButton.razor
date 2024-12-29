@@ -1,4 +1,4 @@
-﻿<button type="button" class="btn theme-toggle-btn" @onclick="ToggleThemeAsync">
+﻿<button class="btn theme-toggle-btn" @onclick="ToggleThemeAsync">
     <i class="bi @(IsLightTheme ? "bi-sun-fill" : "bi-moon-stars-fill")"></i>
 </button>
 
@@ -23,7 +23,7 @@
     }
 
     [data-bs-theme="dark"] .theme-toggle-btn i.bi-moon-stars-fill {
-        color: #C0C0C0;
+        
     }
 
     .theme-toggle-btn i.bi-sun-fill {
@@ -42,7 +42,7 @@
 
 @code {
     [CascadingParameter(Name = nameof(IThemingService.ToggleAsync))]
-    public Func<Task> ToggleThemeAsync { get; set; }
+    public required Func<Task> ToggleThemeAsync { get; set; }
 
     [CascadingParameter(Name = nameof(IThemingService.Theme))]
     public Theme Theme { get; set; }
