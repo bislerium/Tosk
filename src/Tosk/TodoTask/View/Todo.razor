@@ -1,8 +1,6 @@
 ﻿@page "/"
-
 @implements IDisposable
 @inject TodoVM TodoVM
-
 @using TodoModel = Tosk.TodoTask.Models.Todo
 
 <div class="d-flex flex-column justify-content-between p-3" style="height:100vh">
@@ -14,13 +12,13 @@
             <ThemeTogglerButton />
         </div>
         <div class="col-auto">
-            <FilterByRadioButton/>
+            <FilterByRadioButton />
         </div>
     </div>
     <TodoList />
     @if (TodoVM.FilterBy == FilterBy.All)
     {
-            <TodoForm />
+        <TodoForm />
     }
 </div>
 
@@ -32,7 +30,6 @@
     {
         propertyChangedEventHandler = (sender, args) => InvokeAsync(StateHasChanged);
         TodoVM.Subscribe(propertyChangedEventHandler);
-        await TodoVM.LoadDataAsync();
         await base.OnInitializedAsync();
     }
 

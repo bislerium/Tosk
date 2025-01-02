@@ -34,7 +34,6 @@ namespace Tosk
                 .AddSingleton<ITodoService, TodoService>()
                 .AddTodoVM();
 
-
             return builder.Build();
         }
     }

@@ -1,5 +1,4 @@
-﻿
-<button class="btn theme-toggle-btn" @onclick="ToggleThemeAsync">
+﻿<button class="btn theme-toggle-btn" @onclick="ToggleThemeAsync">
     <i class="bi @(IsLightTheme ? "bi-sun-fill" : "bi-moon-stars-fill")"></i>
 </button>
 
@@ -15,16 +14,15 @@
         transition: transform 0.3s ease;
     }
 
-    .theme-toggle-btn i {
-        transition: transform 0.6s ease, color 0.3s ease;
-    }
+        .theme-toggle-btn i {
+            transition: transform 0.6s ease, color 0.3s ease;
+        }
 
     [data-bs-theme="light"] .theme-toggle-btn i.bi-sun-fill {
         color: #FFA500;
     }
 
     [data-bs-theme="dark"] .theme-toggle-btn i.bi-moon-stars-fill {
-        
     }
 
     .theme-toggle-btn i.bi-sun-fill {
@@ -34,7 +32,7 @@
     .theme-toggle-btn i.bi-moon-stars-fill {
         transform: rotate(360deg);
     }
-    
+
     .theme-toggle-btn i.bi-sun-fill, .theme-toggle-btn i.bi-moon-stars-fill {
         transition: transform 0.6s ease;
     }
