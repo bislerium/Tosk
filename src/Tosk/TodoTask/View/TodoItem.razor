@@ -1,0 +1,32 @@
+﻿@inject TodoVM TodoVM
+
+<li class="list-group-item rounded @(Value.IsImportant ? "list-group-item-warning" : "") d-flex justify-content-between align-items-center">
+    <div class="ms-2">
+        <div class="fw-bold overflow-auto @(Value.IsCompleted ? "line-through-complete" : "")">
+            @Value.Title
+        </div>
+    </div>
+    <div class="row ms-2 align-items-center justify-content-end flex-wrap-reverse">
+        <div class="col-auto">
+            @if (Value.IsCompleted)
+            {
+                <span class="badge text-bg-success rounded-pill">@Value.CompletedAt</span>
+            }
+        </div>
+        <div class="col-auto text-nowrap">
+            <button class="btn" @onclick="() => TodoVM.ToggleCompletionAsync(Value)">
+                <i class="bi @(Value.IsCompleted ? "bi-check-circle-fill text-success" : "bi-check-circle")" />
+            </button>
+            <button class="btn" @onclick="() => TodoVM.ToggleImportanceAsync(Value)">
+                <i class="bi @(Value.IsImportant ? "bi-star-fill text-warning" : "bi-star")" />
+            </button>
+        </div>
+    </div>
+</li>
+
+@code {
+
+    [Parameter]
+    public Models.Todo Value { get; set; }
+
+}

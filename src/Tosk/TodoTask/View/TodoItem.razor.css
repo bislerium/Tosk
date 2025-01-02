@@ -1,0 +1,5 @@
+﻿
+.line-through-complete {
+    text-decoration-line: line-through;
+    text-decoration-color: var(--bs-success); /* Use Bootstrap's success color */
+}

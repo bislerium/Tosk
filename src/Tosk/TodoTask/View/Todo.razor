@@ -1,0 +1,40 @@
+﻿@page "/"
+
+@implements IDisposable
+@inject TodoVM TodoVM
+
+@using TodoModel = Tosk.TodoTask.Models.Todo
+
+<div class="d-flex flex-column justify-content-between p-3" style="height:100vh">
+    <div class="mb-3 row justify-content-between">
+        <div class="col-auto fs-4">
+            <GithubRepoLaunchButton />
+            <LinkedinProfileLaunchButton />
+            <AppTitle />
+            <ThemeTogglerButton />
+        </div>
+        <div class="col-auto">
+            <FilterByRadioButton/>
+        </div>
+    </div>
+    <TodoList />
+    @if (TodoVM.FilterBy == FilterBy.All)
+    {
+            <TodoForm />
+    }
+</div>
+
+@code {
+
+    PropertyChangedEventHandler? propertyChangedEventHandler;
+
+    protected override async Task OnInitializedAsync()
+    {
+        propertyChangedEventHandler = (sender, args) => InvokeAsync(StateHasChanged);
+        TodoVM.Subscribe(propertyChangedEventHandler);
+        await TodoVM.LoadDataAsync();
+        await base.OnInitializedAsync();
+    }
+
+    public void Dispose() => TodoVM.Unsubscribe(propertyChangedEventHandler!);
+}

@@ -1,7 +1,9 @@
 ﻿using Microsoft.Extensions.Logging;
-using Microsoft.JSInterop;
-using Tosk.Services.Theming;
-using Tosk.Services.Todo;
+using Tosk.TodoTask.Services;
+using Tosk.TodoTask.Repositories.InMemory;
+using Tosk.TodoTask.Repositories.SQLite;
+using Tosk.SQLite;
+using Tosk.TodoTask.ViewModel;
 
 namespace Tosk
 {
@@ -24,7 +26,14 @@ namespace Tosk
     		builder.Logging.AddDebug();
 #endif
 
-            builder.Services.AddSingleton<ITodoService, TodoService>();
+            builder.Services.AddSQLiteDbContext();
+
+            builder.Services
+                .AddInMemoryTodoRepository()
+                .AddSqliteTodoRepository()
+                .AddSingleton<ITodoService, TodoService>()
+                .AddTodoVM();
+
 
             return builder.Build();
         }

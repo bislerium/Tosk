@@ -1,0 +1,33 @@
+﻿@inject IJSRuntime JS;
+@implements IDisposable
+
+<CascadingValue Value="ToggleThemeAsync" Name="@nameof(IThemingService.ToggleAsync)">
+    <CascadingValue Value="_themingService.Theme" Name="@nameof(IThemingService.Theme)">
+        <Router AppAssembly="@typeof(MauiProgram).Assembly">
+            <Found Context="routeData">
+                <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+                <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+            </Found>
+        </Router>
+    </CascadingValue>
+</CascadingValue>
+
+@code
+{
+    IThemingService _themingService;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _themingService = new ThemingService(JS);
+        await _themingService.InitializeAsync();
+        await base.OnInitializedAsync();
+    }
+
+    Task ToggleThemeAsync() => _themingService.ToggleAsync();
+
+    public void Dispose() => _themingService?.Dispose();
+}
+
+
+
+

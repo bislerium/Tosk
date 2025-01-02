@@ -1,0 +1,25 @@
+﻿@implements IDisposable
+@inject TodoVM TodoVM
+
+<div class="overflow-auto remove-scrollbar" tabindex="-1" style="outline: none">
+        <ol class="list-group  list-group-flush">
+        @foreach (var todo in TodoVM.Todos)
+        {
+                                <TodoItem Value="todo"/>
+        }
+        </ol>
+    </div>
+
+@code {
+
+    PropertyChangedEventHandler? propertyChangedEventHandler;
+
+    protected override async Task OnInitializedAsync()
+    {
+        propertyChangedEventHandler = (sender, args) => InvokeAsync(StateHasChanged);
+        TodoVM.Subscribe(propertyChangedEventHandler);
+        await base.OnInitializedAsync();
+    }
+
+    public void Dispose() => TodoVM.Unsubscribe(propertyChangedEventHandler!);
+    }

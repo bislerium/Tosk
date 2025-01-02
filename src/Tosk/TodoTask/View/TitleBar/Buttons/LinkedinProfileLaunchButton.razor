@@ -1,0 +1,12 @@
+﻿<button class="btn" @onclick="LaunchRepoLink">
+    <i class="bi bi-linkedin"></i>
+</button>
+
+@code {
+    const string Link = "https://www.linkedin.com/in/bishalgc";
+    async Task LaunchRepoLink()
+    {
+        Uri uri = new Uri(Link);
+        await Browser.Default.OpenAsync(uri, BrowserLaunchMode.SystemPreferred);
+    }
+}
