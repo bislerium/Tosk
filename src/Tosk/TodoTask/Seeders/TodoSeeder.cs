@@ -42,7 +42,7 @@ public class TodoSeeder
                 var createdAt = faker.Date.Past(1); // Random date within the past year
                 var isCompleted = faker.Random.Bool(0.6f); // 60% chance of being completed
                 var completedAt = isCompleted
-                    ? (DateTime?) faker.Date.Between(createdAt, DateTime.Now) // Ensure completion is after creation
+                    ? (DateTime?)faker.Date.Between(createdAt, DateTime.Now) // Ensure completion is after creation
                     : null;
 
                 return new Todo

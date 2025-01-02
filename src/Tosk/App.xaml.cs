@@ -1,5 +1,4 @@
 ﻿using Tosk.Commons.SQLite;
-using Tosk.SQLite;
 
 namespace Tosk
 {

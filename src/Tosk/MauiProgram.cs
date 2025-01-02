@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
-using Tosk.TodoTask.Services;
+using Tosk.SQLite;
 using Tosk.TodoTask.Repositories.InMemory;
 using Tosk.TodoTask.Repositories.SQLite;
-using Tosk.SQLite;
+using Tosk.TodoTask.Services;
 using Tosk.TodoTask.ViewModel;
 
 namespace Tosk
@@ -22,8 +22,8 @@ namespace Tosk
             builder.Services.AddMauiBlazorWebView();
 
 #if DEBUG
-    		builder.Services.AddBlazorWebViewDeveloperTools();
-    		builder.Logging.AddDebug();
+            builder.Services.AddBlazorWebViewDeveloperTools();
+            builder.Logging.AddDebug();
 #endif
 
             builder.Services.AddSQLiteDbContext();

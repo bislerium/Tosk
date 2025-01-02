@@ -3,5 +3,5 @@ using Tosk.TodoTask.Models;
 
 namespace Tosk.TodoTask.Repositories
 {
-    public interface ITodoRepository: IRepository<Todo, Guid>;
+    public interface ITodoRepository : IRepository<Todo, Guid>;
 }

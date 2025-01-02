@@ -1,5 +1,5 @@
-﻿using Tosk.TodoTask.Models;
-using Tosk.Enums;
+﻿using Tosk.Enums;
+using Tosk.TodoTask.Models;
 
 namespace Tosk.TodoTask.Repositories
 {
@@ -31,5 +31,5 @@ namespace Tosk.TodoTask.Repositories
         {
             public static IServiceCollection AddSqliteTodoRepository(this IServiceCollection services) => services.AddKeyedSingleton<ITodoRepository, TodoRepository>(nameof(AppMode.Live));
         }
-    }  
+    }
 }

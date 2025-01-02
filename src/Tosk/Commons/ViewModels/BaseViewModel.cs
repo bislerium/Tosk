@@ -8,7 +8,7 @@ namespace Tosk.Commons.ViewModels
         public event PropertyChangedEventHandler? PropertyChanged;
         public void Subscribe(PropertyChangedEventHandler handler) => PropertyChanged += handler;
         public void Unsubscribe(PropertyChangedEventHandler handler) => PropertyChanged -= handler;
-        protected async Task OnPropertyChanged([CallerMemberName] string? name = null) 
+        protected async Task OnPropertyChanged([CallerMemberName] string? name = null)
         {
             await RefreshAsync();
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
