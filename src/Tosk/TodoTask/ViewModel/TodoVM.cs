@@ -9,10 +9,11 @@ public class TodoVM(ITodoService todoService) : BaseViewModel
 {
     public string TodoTitle { get; set; } = string.Empty;
     public FilterBy FilterBy { get; set; }
-
     public IEnumerable<Todo> Todos { get; set; } = [];
 
     protected override Task ReloadAsync() => RefreshDataAsync();
+    private async Task RefreshDataAsync() => Todos = (await FetchData()).ToList();
+    public Task LoadDataAsync() => RefreshDataAsync();
 
     Task<IEnumerable<Todo>> FetchData() => FilterBy switch
     {
@@ -20,9 +21,6 @@ public class TodoVM(ITodoService todoService) : BaseViewModel
         FilterBy.Important => todoService.GetAllImportantAsync(),
         _ => todoService.GetAllAsync()
     };
-
-    async Task RefreshDataAsync() => Todos = (await FetchData()).ToList();
-    public Task LoadDataAsync() => RefreshDataAsync();
 
     public async Task AddAsync()
     {
