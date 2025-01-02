@@ -12,7 +12,7 @@ public class TodoVM(ITodoService todoService) : BaseViewModel
 
     public IEnumerable<Todo> Todos { get; set; } = [];
 
-    protected override Task RefreshAsync() => RefreshDataAsync();
+    protected override Task ReloadAsync() => RefreshDataAsync();
 
     Task<IEnumerable<Todo>> FetchData() => FilterBy switch
     {

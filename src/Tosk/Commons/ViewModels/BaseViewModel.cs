@@ -10,9 +10,9 @@ namespace Tosk.Commons.ViewModels
         public void Unsubscribe(PropertyChangedEventHandler handler) => PropertyChanged -= handler;
         protected async Task OnPropertyChanged([CallerMemberName] string? name = null)
         {
-            await RefreshAsync();
+            await ReloadAsync();
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
-        protected virtual Task RefreshAsync() => Task.CompletedTask;
+        protected virtual Task ReloadAsync() => Task.CompletedTask;
     }
 }
