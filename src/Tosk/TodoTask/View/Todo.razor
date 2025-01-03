@@ -1,5 +1,4 @@
 ﻿@page "/"
-@implements IDisposable
 @inject TodoVM TodoVM
 @using TodoModel = Tosk.TodoTask.Models.Todo
 
@@ -21,17 +20,3 @@
         <TodoForm />
     }
 </div>
-
-@code {
-
-    PropertyChangedEventHandler? propertyChangedEventHandler;
-
-    protected override async Task OnInitializedAsync()
-    {
-        propertyChangedEventHandler = (sender, args) => InvokeAsync(StateHasChanged);
-        TodoVM.Subscribe(propertyChangedEventHandler);
-        await base.OnInitializedAsync();
-    }
-
-    public void Dispose() => TodoVM.Unsubscribe(propertyChangedEventHandler!);
-}

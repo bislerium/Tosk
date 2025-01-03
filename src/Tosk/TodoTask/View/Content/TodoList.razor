@@ -16,11 +16,17 @@
 
     protected override async Task OnInitializedAsync()
     {
-        propertyChangedEventHandler = (sender, args) => InvokeAsync(StateHasChanged);
+        propertyChangedEventHandler = (_, _) => InvokeAsync(StateHasChanged);
         TodoVM.Subscribe(propertyChangedEventHandler);
         await TodoVM.LoadDataAsync();
         await base.OnInitializedAsync();
     }
 
-    public void Dispose() => TodoVM.Unsubscribe(propertyChangedEventHandler!);
+    public void Dispose() 
+    {
+        if (propertyChangedEventHandler is not null)
+        {
+            TodoVM.Unsubscribe(propertyChangedEventHandler);
+        }
+    }
 }
