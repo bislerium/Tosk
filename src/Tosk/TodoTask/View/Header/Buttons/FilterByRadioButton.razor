@@ -3,17 +3,17 @@
 <InputRadioGroup TValue="FilterBy" Value="TodoVM.FilterBy" ValueExpression="() => TodoVM.FilterBy" ValueChanged="value => TodoVM.UpdateFilterAsync(value)">
     <div class="btn-group" role="group">
         <InputRadio Value="FilterBy.All" id="all" class="btn-check" />
-        <label class="btn btn-outline-primary" for="all">
+        <label class="btn @(TodoVM.FilterBy == FilterBy.All ? " btn-outline-primary" : "btn-outline-secondary")" for="all">
             <i class="bi bi-sunglasses"></i> All
         </label>
 
         <InputRadio Value="FilterBy.Completed" id="completed" class="btn-check" />
-        <label class="btn btn-outline-success" for="completed">
+        <label class="btn @(TodoVM.FilterBy == FilterBy.Completed ? "btn-outline-success" : "btn-outline-secondary")" for="completed">
             <i class="bi bi-check-circle-fill"></i> Completed
         </label>
 
         <InputRadio Value="FilterBy.Important" id="important" class="btn-check" />
-        <label class="btn btn-outline-warning" for="important">
+        <label class="btn @(TodoVM.FilterBy == FilterBy.Important ? " btn-outline-warning" : "btn-outline-secondary")" for="important">
             <i class="bi bi-star-fill"></i> Important
         </label>
     </div>

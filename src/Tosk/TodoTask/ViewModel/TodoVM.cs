@@ -11,9 +11,6 @@ public class TodoVM(ITodoService todoService) : BaseViewModel
     public FilterBy FilterBy { get; set; }
     public IEnumerable<Todo> Todos { get; set; } = [];
 
-    protected override Task ReloadAsync() => RefreshDataAsync();
-    private async Task RefreshDataAsync() => Todos = (await FetchData()).ToList();
-    public Task LoadDataAsync() => RefreshDataAsync();
 
     Task<IEnumerable<Todo>> FetchData() => FilterBy switch
     {
@@ -21,30 +18,39 @@ public class TodoVM(ITodoService todoService) : BaseViewModel
         FilterBy.Important => todoService.GetAllImportantAsync(),
         _ => todoService.GetAllAsync()
     };
+    public async Task LoadTodosAsync() => Todos = (await FetchData()).ToList();
+    private Task<bool> ReloadTodosAsync() => LoadTodosAsync().ContinueWith(_ => true);
+
 
     public async Task AddAsync()
     {
         await todoService.AddAsync(TodoTitle);
         TodoTitle = string.Empty;
-        await OnPropertyChanged();
+        await NotifyPropertyChangedAsync(predicate: ReloadTodosAsync);
     }
 
     public async Task ToggleCompletionAsync(Todo todo)
     {
         await todoService.ToggleCompletionAsync(todo);
-        await OnPropertyChanged();
+        await NotifyPropertyChangedAsync(predicate: ReloadTodosAsync);
     }
 
     public async Task ToggleImportanceAsync(Todo todo)
     {
         await todoService.ToggleImportanceAsync(todo);
-        await OnPropertyChanged();
+        await NotifyPropertyChangedAsync(predicate: ReloadTodosAsync);
     }
 
-    public Task UpdateFilterAsync(FilterBy filterBy)
+    public async Task DeleteAsync(Todo todo)
+    {
+        await todoService.DeleteAsync(todo);
+        await NotifyPropertyChangedAsync(predicate: ReloadTodosAsync);
+    }
+
+    public async Task UpdateFilterAsync(FilterBy filterBy)
     {
         FilterBy = filterBy;
-        return OnPropertyChanged();
+        await NotifyPropertyChangedAsync(predicate: ReloadTodosAsync);
     }
 }
 

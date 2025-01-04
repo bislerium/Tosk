@@ -1,0 +1,28 @@
+﻿@inject TodoVM TodoVM
+
+<li @key="Value" class="list-group-item rounded @(Value.IsImportant ? "list-group-item-warning" : "") d-flex justify-content-between align-items-center">
+    <div class="ms-2">
+        <div class="fw-bold overflow-auto @(Value.IsCompleted ? "line-through-complete" : "")">
+            @Value.Title
+        </div>
+    </div>
+    <div class="row ms-2 align-items-center justify-content-end flex-wrap-reverse">
+        <div class="col-auto">
+            @if (Value.IsCompleted)
+            {
+                <span class="badge text-bg-success rounded-pill">@Value.CompletedAt</span>
+            }
+        </div>
+        <div class="col-auto text-nowrap">
+            <ToggleCompletionButton Value="Value" />
+            <ToggleImportanceButton Value="Value" />
+            <DeleteButton Value="Value" />
+        </div>
+    </div>
+</li>
+
+@code {
+
+    [Parameter]
+    public required Models.Todo Value { get; set; }
+}

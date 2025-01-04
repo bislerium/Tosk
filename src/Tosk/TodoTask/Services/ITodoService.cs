@@ -10,4 +10,5 @@ public interface ITodoService
     Task<IEnumerable<Todo>> GetAllImportantAsync();
     Task ToggleCompletionAsync(Todo todo);
     Task ToggleImportanceAsync(Todo todo);
+    Task DeleteAsync(Todo todo);
 }

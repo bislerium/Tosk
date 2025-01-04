@@ -1,0 +1,10 @@
+﻿
+.btn:hover .bi-star::before {
+    content: "\f586";
+    color: var(--bs-warning);
+}
+
+.btn:hover .bi-star-fill::before {
+    content: "\f588";
+    color: var(--bs-body-color);
+}

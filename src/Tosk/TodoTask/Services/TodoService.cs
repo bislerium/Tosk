@@ -5,7 +5,7 @@ using Tosk.TodoTask.Repositories;
 
 namespace Tosk.TodoTask.Services;
 
-public class TodoService([FromKeyedServices(nameof(AppMode.Live))] ITodoRepository todoRepository) : ITodoService
+public class TodoService([FromKeyedServices(nameof(AppMode.Demo))] ITodoRepository todoRepository) : ITodoService
 {
     public Task AddAsync(string task)
     {
@@ -42,5 +42,10 @@ public class TodoService([FromKeyedServices(nameof(AppMode.Live))] ITodoReposito
     {
         todo.ToggleImportance();
         return todoRepository.UpdateAsync(todo);
+    }
+
+    public Task DeleteAsync(Todo todo)
+    {
+        return todoRepository.DeleteAsync(todo);
     }
 }

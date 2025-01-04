@@ -1,0 +1,11 @@
+﻿@inject TodoVM TodoVM
+
+<button class="btn" @onclick="() => TodoVM.ToggleImportanceAsync(Value)">
+    <i class="bi @(Value.IsImportant ? "bi-star-fill text-warning" : "bi-star")" />
+</button>
+
+@code {
+
+    [Parameter]
+    public required Models.Todo Value { get; set; }
+}

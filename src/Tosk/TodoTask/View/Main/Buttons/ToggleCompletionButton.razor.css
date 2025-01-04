@@ -1,0 +1,10 @@
+﻿
+.btn:hover .bi-check-circle::before {
+    content: "\f26a";
+    color: var(--bs-success);
+}
+
+.btn:hover .bi-check-circle-fill::before {
+    content: "\f26b";
+    color: var(--bs-body-color);
+}

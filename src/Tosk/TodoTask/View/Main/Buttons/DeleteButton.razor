@@ -1,0 +1,15 @@
+﻿@inject TodoVM TodoVM
+@implements IHandleEvent
+
+<button class="btn" @onclick="() => TodoVM.DeleteAsync(Value)">
+    <i class="bi bi-x-diamond text-danger" />
+</button>
+
+@code {
+
+    [Parameter]
+    public required Models.Todo Value { get; set; }
+
+    // Omit StateHasChanged call to avoid rerendering on @onclick invocation.
+    Task IHandleEvent.HandleEventAsync(EventCallbackWorkItem callback, object? arg) => callback.InvokeAsync(arg);
+}

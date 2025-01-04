@@ -1,0 +1,5 @@
+﻿
+.btn:hover .bi-x-diamond::before {
+    content: "\f624";
+    color: var(--bs-danger);
+}
