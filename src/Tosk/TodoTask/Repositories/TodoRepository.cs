@@ -1,4 +1,4 @@
-﻿using Tosk.Enums;
+﻿using Tosk.Commons.Enums;
 using Tosk.TodoTask.Models;
 
 namespace Tosk.TodoTask.Repositories
@@ -21,7 +21,6 @@ namespace Tosk.TodoTask.Repositories
 
     namespace SQLite
     {
-        using Microsoft.Extensions.DependencyInjection;
         using Tosk.Commons.Repositories.Sources.Sqlite;
         using Tosk.Commons.SQLite;
 

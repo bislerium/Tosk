@@ -1,4 +1,4 @@
-﻿namespace Tosk.Enums
+﻿namespace Tosk.Commons.Enums
 {
     public enum AppMode
     {
