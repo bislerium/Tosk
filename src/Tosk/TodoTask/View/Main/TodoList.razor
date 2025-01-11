@@ -1,12 +1,19 @@
 ﻿@implements IDisposable
 @inject TodoVM TodoVM
 
-<ol class="list-group list-group-flush">
-    @foreach (var todo in TodoVM.Todos)
-    {
-        <TodoItem Value="todo" />
-    }
-</ol>
+@if (TodoVM.Todos.Count() == 0)
+{
+    <img src="img/sleep-emoji.png" class="h-50 mx-auto" />
+}
+else
+{
+    <ol class="list-group list-group-flush">
+        @foreach (var todo in TodoVM.Todos)
+        {
+            <TodoItem Value="todo" />
+        }
+    </ol>
+}
 
 @code {
 

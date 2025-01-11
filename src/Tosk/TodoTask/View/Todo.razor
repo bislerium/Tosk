@@ -6,14 +6,7 @@
         <AppControlBar />
     </header>
     <main class="overflow-auto remove-scrollbar" style="outline: none">
-        @if (TodoVM.Todos.Count() != 0)
-        {
-            <img src="img/sleep-emoji.png" class="h-50 mx-auto" />
-        }
-        else
-        {
-            <TodoList />
-        }
+        <TodoList />
     </main>
     <footer class="mt-3">
         @if (TodoVM.FilterBy == FilterBy.All)

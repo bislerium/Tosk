@@ -1,0 +1,5 @@
+﻿@inject TodoVM TodoVM
+
+<button class="btn theme-toggle-btn" @onclick="TodoVM.ToggleAppMode">
+    <i class="bi @(TodoVM.AppMode == Commons.Enums.AppMode.Live ? "bi-database-fill-check" : "bi-database-slash")"></i>
+</button>

@@ -4,7 +4,7 @@ using Tosk.TodoTask.Repositories;
 
 namespace Tosk.TodoTask.Services;
 
-public class TodoService([FromKeyedServices(nameof(AppMode.Demo))] ITodoRepository todoRepository) : ITodoService
+public class TodoService([FromKeyedServices(AppMode.Live)] ITodoRepository todoRepository) : ITodoService
 {
     public Task AddAsync(string task)
     {
@@ -47,4 +47,9 @@ public class TodoService([FromKeyedServices(nameof(AppMode.Demo))] ITodoReposito
     {
         return todoRepository.DeleteAsync(todo);
     }
+}
+
+public static class Registrar
+{
+    public static IServiceCollection AddTodoService(this IServiceCollection services) => services.AddSingleton<ITodoService, TodoService>();
 }

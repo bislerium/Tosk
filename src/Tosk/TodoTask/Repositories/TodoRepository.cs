@@ -15,7 +15,7 @@ namespace Tosk.TodoTask.Repositories
 
         public static class Registrar
         {
-            public static IServiceCollection AddInMemoryTodoRepository(this IServiceCollection services) => services.AddKeyedSingleton<ITodoRepository, TodoRepository>(nameof(AppMode.Demo));
+            public static IServiceCollection AddInMemoryTodoRepository(this IServiceCollection services) => services.AddKeyedSingleton<ITodoRepository, TodoRepository>(AppMode.Demo);
         }
     }
 
@@ -28,7 +28,7 @@ namespace Tosk.TodoTask.Repositories
 
         public static class Registrar
         {
-            public static IServiceCollection AddSqliteTodoRepository(this IServiceCollection services) => services.AddKeyedSingleton<ITodoRepository, TodoRepository>(nameof(AppMode.Live));
+            public static IServiceCollection AddSqliteTodoRepository(this IServiceCollection services) => services.AddKeyedSingleton<ITodoRepository, TodoRepository>(AppMode.Live);
         }
     }
 }

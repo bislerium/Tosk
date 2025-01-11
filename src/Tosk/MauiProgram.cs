@@ -3,6 +3,7 @@ using Tosk.SQLite;
 using Tosk.TodoTask.Repositories.InMemory;
 using Tosk.TodoTask.Repositories.SQLite;
 using Tosk.TodoTask.Services;
+using Tosk.TodoTask.Services.Resolver;
 using Tosk.TodoTask.ViewModel;
 
 namespace Tosk
@@ -31,7 +32,8 @@ namespace Tosk
             builder.Services
                 .AddInMemoryTodoRepository()
                 .AddSqliteTodoRepository()
-                .AddSingleton<ITodoService, TodoService>()
+                .AddTodoService()
+                .AddTodoServiceResolver()
                 .AddTodoVM();
 
             return builder.Build();
