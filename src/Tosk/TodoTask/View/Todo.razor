@@ -1,11 +1,11 @@
 ﻿@page "/"
 @inject TodoVM TodoVM
 
-<div class="d-flex flex-column justify-content-between p-3 vh-100">
+<div class="d-flex flex-column p-3 vh-100">
     <header>
         <AppControlBar />
     </header>
-    <main class="overflow-auto remove-scrollbar" style="outline: none">
+    <main class="flex-grow-1 overflow-auto remove-scrollbar" style="outline: none">
         <TodoList />
     </main>
     <footer class="mt-3">
