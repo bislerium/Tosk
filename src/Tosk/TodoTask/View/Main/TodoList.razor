@@ -1,9 +1,11 @@
 ﻿@implements IDisposable
 @inject TodoVM TodoVM
 
-@if (TodoVM.Todos.Count() == 0)
+@if (!TodoVM.Todos.Any())
 {
-    <img src="img/sleep-emoji.png" class="h-50 mx-auto" />
+    <div class="d-flex justify-content-center align-items-center" style="height: 100%;">
+        <img src="img/sleep-emoji.png" class="h-50" />
+    </div>
 }
 else
 {
@@ -17,21 +19,21 @@ else
 
 @code {
 
-    PropertyChangedEventHandler? propertyChangedEventHandler;
+    PropertyChangedEventHandler? _propertyChangedEventHandler;
 
     protected override async Task OnInitializedAsync()
     {
-        propertyChangedEventHandler = (_, _) => InvokeAsync(StateHasChanged);
-        TodoVM.PropertyChanged += propertyChangedEventHandler;
+        _propertyChangedEventHandler = (_, _) => InvokeAsync(StateHasChanged);
+        TodoVM.PropertyChanged += _propertyChangedEventHandler;
         await TodoVM.LoadTodosAsync();
         await base.OnInitializedAsync();
     }
 
     public void Dispose() 
     {
-        if (propertyChangedEventHandler is not null)
+        if (_propertyChangedEventHandler is not null)
         {
-            TodoVM.PropertyChanged -= propertyChangedEventHandler;
+            TodoVM.PropertyChanged -= _propertyChangedEventHandler;
         }
     }
 }
